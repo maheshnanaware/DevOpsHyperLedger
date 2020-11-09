@@ -1,0 +1,362 @@
+////////////////////////////////////////////////////////////////////////
+======================= DEVOPS - AWS TRAINING =========================
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+========================= [GitHub 2020] =============================
+Usr: maheshnanaware@gmail.com
+Pwd: sonkuk123
+
+# Modules:
+	1) Overview of DevOps
+	2) Version control using Git & GitHub
+	3) Continuous Integration using Jenkins
+	4) Containerization using DOCKER
+	5) Kubernetes Installation
+	6) What is Kubernetes??
+	7) Config Mgmt using:
+		- Ansible
+		- Puppet
+	8) Continuous Monitoring - NagiOS
+
+------------------------
+1) Overview of DevOps:
+------------------------	
+# DEVOPS Stages:
+	1- Version Control(Source Code mgmt): Maintains different versions of code e.g. Git etc
+	2- Continuous Integration (Continuous Build): Compile, Validate, Unit Test, Code review, Integration testing 
+		e.g. Jenkins, Hudson, Bamboo etc 	** Very imp module in DevOps **
+	3- Continuous Delivery (Continuous Testing): Deployment of build apps to Test servers, UAT testing e.g. Selenium for auto-testing
+	4- Continuous Deployment (Config mgmt & Containerization): Deploying the tested app on Prod env for release e.g DOCKER,Puppet etc
+	5- Continuous Monitoring: Deployed app on Prod is continuously monitored using tools like NagiOS, Splunk, ELK stack etc
+	
+	** Jenkins - is a heart of DevOps lifecycle which gives a 360 deg view of Software Development lifecycle. UI helps to check all the activities. **
+	
+	#1 Version Control (Source Code Mgmt):>>
+		1- Centralized source code mgmt
+			Pros:
+				-Central server (local or remote) with single respository to store all the files which users can access
+				-Every user will have a working copy
+				-Commit/Update mechanism
+			Cons:
+				-It is not locally available so always have to be n/w connected
+				-Central server crashed all data will be lost
+			
+		2- Distributed source code mgmt
+			Pros:
+				- Every user will have a clone or a copy of the repository stored locally
+				- Push/Pull mechanism
+				- Do not always need a remote server
+		
+		#1.1 Tools:>>
+			
+			1) Git:
+			   It is a Distributed version control tool that provides data assurance for developing quality software
+			   
+			   Process Flow:
+			   1) Working Dir --(Git Add)-->> To Staging Area --(Git Commit)-->> To Local repository
+			   2) From Local repository -- (Git Push) --> To Remote repository
+			   3) From Remote repository <<--- (Git Pull) -- To Local repository
+			   4) From Local repository <<-- (Git Checkout/Merge) --> To Working Dir
+		   
+	#2 Continuous Integration:>>	   
+		Developing practice in which a developer is allowed to commit changes to the source code into repository several times a day or frequently.
+		
+		$ Process Flow:->
+		1) Developers will make changes in the source code and commit the code to the shared respository (e.g. GitHub)
+		2) Jenkins server which is sitting in the middle will pull the code from the repository (Git) & prepare a Build
+		
+		** Build (Compile, Code review, Unit test, Integration test & create package) >> .WAR/.JAR **
+	
+	#3 Continuous Delivery:>>
+		It is deployment of BUILD on the TEST server for UAT Testing. This happens in a continuous fashion.
+		
+		$ Process Flow:->
+		1) Developers will make changes in the source code and commit the code to the shared respository (e.g. GitHub)
+		2) Jenkins server which is sitting in the middle will pull the code from the repository (Git) & prepare a Build
+		3) Jenkins will deploy the BUILD on the TEST server for UAT testing
+	
+	#4 Continuous Deployment:>>	
+		Taking the BUILD app and deploying it on the Prod server
+		
+		$ Process Flow:->
+		1) Developers will make changes in the source code and commit the code to the shared respository (e.g. GitHub)
+		2) Jenkins server which is sitting in the middle will pull the code from the repository (Git) & prepare a Build
+		3) Jenkins will deploy the BUILD on the TEST server for UAT/End User testing
+		4) Deploy the BUILD app after UAT testing to the Prod env
+		
+		** Continuous deployment on PROD server is not a good practice **
+		*To-Do >> Install Jenkins **
+	
+		# Config Mgmt:>>
+		   - It is a practice of handling Changes systematically so that a system maintains its integrity
+		   - It ensures that the current Design & build state of the system is known, good & trusted
+		   - It doesn't reply on the tacit of development team
+		   
+		   Tools:
+		   Puppet, Chef, Ansible & Salt Stack
+			
+			@Puppet:>
+			- Tool used for deploying, configuring and managing server.
+			- Puppet & Chef can pull the configuration but cannot Push
+			- SaltStack can PUSH the configuration & not Pull
+			- Supports Master & Slave architecture
+		
+		# Containerization:>>
+			-Containers are light weight alternatives to Virtual Machines (VMs)
+			-Containers usually make your applications run on different computers
+				e.g. same image on different servers should be present
+			
+			Tools:
+				- Docker: 
+					It is a container which contains Binaries & Libraries required for particular apps
+				
+				Components:
+				- Docker File 		e.g  Proj Code
+				- Docker Image 		e.g. On VM
+				- Docker Container	e.g. On VM
+				- Docker Hub		e.g. GitHub repository
+					e.g. Different servers will access/download the Docker images from Docker Hub
+
+	#5 Continuous Monitoring:>>
+	   - Continuous Monitoring tools resolve any system errors. System errors- Low memory, Unreachable servers etc 
+		
+		Pros:
+			- It can find out any root cause of the issue
+			- Network or server problems
+			- Monitors and Trouble shoots any performance issues
+			- Allows us to plan & perform infrastructure upgrades
+			- Respond to issues 
+			- Automatically fix problems when issues are detected
+			- Ensure IT infrastructure outages
+			- Can monitor entire business & infrastructure process
+	
+		Tools:
+			- NagiOS:
+				- Behaves like a process Scheduler which contains Plugins.
+				- Plugins checks the status & get results 
+	
+	## Use Cases:>>
+	----------------------------
+	1) Developers will make changes in the source code and commit the code to the shared respository (e.g. GitHub)
+	2) Jenkins server which is sitting in the middle will pull the code from the repository (Git) & Clone the repository
+	3) Jenkins will build a Docker image using a Docker file. This image will be tested.
+	4) Docker image file will be PUSHED to Docker Hub (i.e. Git Repository of Docker images)
+	
+	** The above stages are written into the Jenkins pipeline specifications in a Jenkins file **
+	
+---------------------------------------
+2) Version control using Git & GitHub:
+---------------------------------------
+	## Version Control Tools:
+		- Git
+		- CVS	(No local copy provided - Obsolete)
+		- Mercurial
+		- Appache Subversion
+	
+		## Git & GitHub
+			- It is a distributed version control system
+			- GitHub is a central repository
+			- Git is a distributed version control tool that allows to create local repositories
+			
+			Features of Git: 
+			- Git to GitHub is a Push Pull mechanism
+			- Git is written in C lang
+			- It is Open Source
+			- Uses SHA1 (Cryptographic algorithm) for Security
+			- Has a .git folder on Local & Central repository
+		
+		** Install Git on Ubuntu OS **
+	
+	## Creating Central & Local Repository:
+		1- Open link www.github.com
+			- Create account, repository
+		2- https://git-scm.com/download/win (for windows or linux) v2.29.2
+			- Install Git
+			- Create a new folder 'DevOps_Blockchain' on your local machine (C:\Mahesh\DevOps-AWS-2020)
+			- Double click the folder 'DevOps-AWS-2020' and open it
+			- In the empty folder right click and select the option "Git Bash here'
+			- It will open a Terminal window 
+			- Type cmd 
+				$ git init
+				o/p: Initialized empty Git repository in C:\Mahesh\DevOps-AWS-2020/.git/
+			- Folder ".git" will be created & sub-folders will be created under it
+			** Local repository is created **
+		3- Link the Local repository to Central Repository. Pull & push files vice versa
+		4- Copy the GitHub repository link from your repository "maheshnanaware/DevOpsHyperLedger"
+			link copied:>> https://github.com/maheshnanaware/DevOpsHyperLedger.git
+		5- Add Origin to your local using cmd-
+			$ git remote add origin "https://github.com/maheshnanaware/DevOpsHyperLedger.git"
+		6- Use Git PULL cmd to fetch files from Central to Local repository
+			$ git pull origin master
+				o/p: Error "origin master not found"
+				Solution: My repository is connected to branch "main" in GitHub & not "master"
+				
+			$ git pull origin main
+				remote: Enumerating objects: 6, done.
+				remote: Counting objects: 100% (6/6), done.
+				remote: Compressing objects: 100% (4/4), done.
+				remote: Total 6 (delta 1), reused 0 (delta 0), pack-reused 0
+				Unpacking objects: 100% (6/6), 1.24 KiB | 50.00 KiB/s, done.
+				From https://github.com/maheshnanaware/DevOpsHyperLedger
+				 * branch            main       -> FETCH_HEAD
+				 * [new branch]      main       -> origin/main
+		7- "readme.md" file from my central repository is copied to my local repository (C:\Mahesh\DevOps-AWS-2020)
+		8- Using Git "commit" to commit changes
+			$ git status
+			On branch master
+			Untracked files:
+			  (use "git add <file>..." to include in what will be committed)
+					Hello.txt
+
+			nothing added to commit but untracked files present (use "git add" to track)
+			
+			** Untracked files- are those which are not added in the INDEX yet **
+			
+			$ git add Hello.txt		>> Hello.txt is a new file created on my local machine <<
+			
+			$ git status
+			On branch master
+			Changes to be committed:
+			  (use "git restore --staged <file>..." to unstage)
+					new file:   Hello.txt
+			
+		# Now commit changes on your local repository:
+			
+			$ git commit -m "adding file to local repos"
+			Author identity unknown
+
+			*** Please tell me who you are.
+
+			Run
+
+			  git config --global user.email "you@example.com"
+			  git config --global user.name "Your Name"
+
+			to set your account's default identity.
+			Omit --global to set the identity only in this repository.
+
+			fatal: unable to auto-detect email address (got 'ADMIN@LAPTOP-O7JUNQEJ.(none)')
+
+			$ git status
+			On branch master
+			Changes to be committed:
+			  (use "git restore --staged <file>..." to unstage)
+					new file:   Hello.txt
+
+			Untracked files:
+			  (use "git add <file>..." to include in what will be committed)
+					Hello1.txt
+			
+			$ git add -A 	(All files)
+			
+			$ git status
+			On branch master
+			Changes to be committed:
+			  (use "git restore --staged <file>..." to unstage)
+					new file:   Hello.txt
+					new file:   Hello1.txt
+
+			$ git log
+			commit 240711cc2dc7cca1ae7769e7cfa3ec99ead54095 (HEAD -> master, origin/main)
+			Author: maheshnanaware <65169563+maheshnanaware@users.noreply.github.com>
+			Date:   Tue Nov 3 17:21:23 2020 +0530
+
+				Update README.md
+
+			commit 934e2a0de37455870ec7868c451bd5ca6ff6fe96
+			Author: maheshnanaware <65169563+maheshnanaware@users.noreply.github.com>
+			Date:   Tue Nov 3 17:19:09 2020 +0530
+			Initial commit
+			
+		# Create New Branch:
+		
+			$ git branch <Branch Name>
+			
+		# Switch to the New Branch:
+			
+			$ git checkout <Branch Name>
+			
+			e.g:
+			$ git checkout main
+			Switched to a new branch 'main'
+			A       DevOps-AWS Training-1.txt
+			A       Hello.txt
+			A       Hello1.txt
+			Branch 'main' set up to track remote branch 'main' from 'origin'.
+
+		# Git Rebase /Merge
+		
+		$ git rebase main
+		error: cannot rebase: You have unstaged changes.
+		error: additionally, your index contains uncommitted changes.
+		error: Please commit or stash them.
+
+		# PUSH changes to GitHub:
+		
+		1) Generate Public SSH key & add that KEY in to your GitHub account
+
+		$ ssh-keygen
+		Generating public/private rsa key pair.
+		Enter file in which to save the key (/c/Users/ADMIN/.ssh/id_rsa):
+		Enter passphrase (empty for no passphrase):kuki
+		Enter same passphrase again:kuki
+		Your identification has been saved in /c/Users/ADMIN/.ssh/id_rsa
+		Your public key has been saved in /c/Users/ADMIN/.ssh/id_rsa.pub
+		The key fingerprint is:
+		SHA256:8NkaM2FOMWVq7aUgx+pYHB/5fQ8opI4kgwqTaMj1x98 ADMIN@LAPTOP-O7JUNQEJ
+		The key's randomart image is:
+		+---[RSA 3072]----+
+		|        o.o      |
+		|       . B       |
+		|   .  + % o .    |
+		|+......& @ + .   |
+		|*o. o.=oS * o o  |
+		|oo   B.o.=.. . o |
+		|.   . o o. E    .|
+		|                 |
+		|                 |
+		+----[SHA256]-----+
+		
+		2) To see the above Public SSH key:
+		   $ cat /c/Users/ADMIN/.ssh/id_rsa.pub
+		   
+		   ADMIN@LAPTOP-O7JUNQEJ MINGW64 /c/Mahesh/DevOps-AWS-2020 (master)
+			$ cat /c/Users/ADMIN/.ssh/id_rsa.pub
+			
+			ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDWPLK4HfbYp7Uqkclwhl0iuJCx1DM3aDtJrAxVjgWpS5/3uSVcXJ6QeaAnOwcwr+H8x5nrc/DMIe89tbcH/IIoDbsllBWibXrLQRD0IfvECjgBLcKeiFQYl9yezQG+H4qtIs++ZnDm+M9Gj2e6Fpr/BgomnfxEwCrTwLoDLSY2m17fUSr/ZEcrh5PxdmkApMajV0o0dJVH6osJ1wYbDFmt/SnB00lEEM5zNRJqpeiSkYSn8fZMxiIMf8Kw6JXEsMsa/iLrj+8O32Zu12/POiJ5Gvcs8HGqh4GOwkd0/micL26Qg10owW1fUkOkUdqDJfC+DCWYLpEH4NfVIet2ajNt2ONra44QdSboAJqO7EDjIofV4jmjQ9WmAu4poQobmQM4jMkPtlM1MEz4hMxPYra7WwBvucxtezDcy2iqyUPR7Hadd4Hzvpkc57k7aM/3MwtoEjLxWS2bXO7Z/kC6CcaIFh4ZFKzfjbIg4GEzUByijoZDwjEjSusPnlBtDSIi6jk= ADMIN@LAPTOP-O7JUNQEJ
+
+		3) Add that KEY in to your GitHub account:
+			1- Open GitHub -> maheshnanaware Personal settings --> SSH & GPG Keys --> Click 'New SSH Key'
+			2- Copy the above ssh-rsa key and paste it in to the edit box & save
+			ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDWPLK4HfbYp7Uqkclwhl0iuJCx1DM3aDtJrAxVjgWpS5/3uSVcXJ6QeaAnOwcwr+H8x5nrc/DMIe89tbcH/IIoDbsllBWibXrLQRD0IfvECjgBLcKeiFQYl9yezQG+H4qtIs++ZnDm+M9Gj2e6Fpr/BgomnfxEwCrTwLoDLSY2m17fUSr/ZEcrh5PxdmkApMajV0o0dJVH6osJ1wYbDFmt/SnB00lEEM5zNRJqpeiSkYSn8fZMxiIMf8Kw6JXEsMsa/iLrj+8O32Zu12/POiJ5Gvcs8HGqh4GOwkd0/micL26Qg10owW1fUkOkUdqDJfC+DCWYLpEH4NfVIet2ajNt2ONra44QdSboAJqO7EDjIofV4jmjQ9WmAu4poQobmQM4jMkPtlM1MEz4hMxPYra7WwBvucxtezDcy2iqyUPR7Hadd4Hzvpkc57k7aM/3MwtoEjLxWS2bXO7Z/kC6CcaIFh4ZFKzfjbIg4GEzUByijoZDwjEjSusPnlBtDSIi6jk= ADMIN@LAPTOP-O7JUNQEJ
+			
+			3- Authenticate using Git Terminal cmd:
+			
+			$ ssh -T git@github.com
+			The authenticity of host 'github.com (13.234.176.102)' can't be established.
+			RSA key fingerprint is SHA256:nThbg6kXUpJWGl7E1IGOCspRomTxdCARLviKw6E5SY8.
+			Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
+			Warning: Permanently added 'github.com,13.234.176.102' (RSA) to the list of known hosts.
+			Enter passphrase for key '/c/Users/ADMIN/.ssh/id_rsa':
+			Hi maheshnanaware! You've successfully authenticated, but GitHub does not provide shell access.
+
+			
+		3) Push changes to using SSH to GitHub account
+			1- Create a new branch 'firstbranch'
+				$ git branch firstbranch
+			
+			2- Move to the new branch
+				$ git checkout firstbranch
+				
+			3- Push all files to the new branch
+				$ git push origin firstbranch
+				Total 0 (delta 0), reused 0 (delta 0), pack-reused 0
+				remote:
+				remote: Create a pull request for 'firstbranch' on GitHub by visiting:
+				remote:      https://github.com/maheshnanaware/DevOpsHyperLedger/pull/new/firstbranch
+				remote:
+				To https://github.com/maheshnanaware/DevOpsHyperLedger.git
+				 * [new branch]      firstbranch -> firstbranch
+
+
+
+	
